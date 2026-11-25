@@ -43,6 +43,7 @@ async function runCheck(name, check) {
 	const dbPath = join(tmp, `${name.replace(/\W+/g, '_')}.db`);
 	let server = await startServer(dbPath);
 	const ctx = {
+		url: () => server.url,
 		async request(method, path, body) {
 			const payload = body === undefined || typeof body === 'string' ? body : JSON.stringify(body);
 			const res = await fetch(server.url + path, { method, body: payload });

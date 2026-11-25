@@ -25,4 +25,4 @@ Todo 存在一张表里：`todos(id, title, done)`，只有 `lib/store.js` 读�
 - `routes/*.js`：导出 `{ 'GET /path/:id': handler }`。handler 收到 `{ store, filters, features, params, query, readJson }`，返回 `{ status, headers, json }` 或 `{ status, headers, body }`，出错时抛 `HttpError`。
 - `filters/<参数>.js`：导出 `(todos, value) => todos`，处理 `GET /api/todos?<参数>=`。
 - `public/features/*.js`：网页功能，`import app from '/app.js'`，可用的接口见 `public/app.js` 开头。
-- `checks/*.js`：导出 `{ '名称': async ({ request, restart }) => {} }`，断言失败就抛错。每个检查用自己的服务和临时数据库。
+- `checks/*.js`：导出 `{ '名称': async ({ request, restart, url }) => {} }`，断言失败就抛错。每个检查用自己的服务和临时数据库。
