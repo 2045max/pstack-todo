@@ -16,3 +16,13 @@
 - `./verify.sh`：用空闲端口和临时数据库启动真实服务，发 HTTP 请求检查，全过返回 0。结束时关闭服务并删除临时文件。
 - CI 在每个 PR 和 `main` 上运行 `./verify.sh`。
 - Todo 的 JSON 格式：`{"id": 1, "title": "买牛奶", "done": false}`
+
+## 文件边界
+
+Todo 存在一张表里：`todos(id, title, done)`，只有 `lib/store.js` 读写它。
+新功能只新增文件，启动时按文件自动加载：
+
+- `routes/*.js`：导出 `{ 'GET /path/:id': handler }`。handler 收到 `{ store, filters, features, params, query, readJson }`，返回 `{ status, headers, json }` 或 `{ status, headers, body }`，出错时抛 `HttpError`。
+- `filters/<参数>.js`：导出 `(todos, value) => todos`，处理 `GET /api/todos?<参数>=`。
+- `public/features/*.js`：网页功能，`import app from '/app.js'`，可用的接口见 `public/app.js` 开头。
+- `checks/*.js`：导出 `{ '名称': async ({ request, restart }) => {} }`，断言失败就抛错。每个检查用自己的服务和临时数据库。

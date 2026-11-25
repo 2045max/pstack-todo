@@ -1,0 +1,6 @@
+{
+  "name": "pstack-todo",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" }
+}

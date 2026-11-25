@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Todo</title>
+<style>
+	body { font: 16px/1.5 system-ui, sans-serif; max-width: 36rem; margin: 2rem auto; padding: 0 1rem; }
+	#toolbar { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: 1rem; }
+	#toolbar form { display: flex; gap: .5rem; flex: 1; }
+	input[type=text] { flex: 1; }
+	ul { list-style: none; padding: 0; }
+	li { display: flex; gap: .5rem; align-items: center; padding: .25rem 0; }
+	li .title { flex: 1; white-space: pre-wrap; overflow-wrap: anywhere; }
+	li.done .title { text-decoration: line-through; opacity: .6; }
+</style>
+<h1>Todo</h1>
+<div id="toolbar"></div>
+<ul id="list"></ul>
+<script type="module" src="/app.js"></script>
+<!-- features -->
